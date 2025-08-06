@@ -1,4 +1,5 @@
 import HashMap from "./HashMap.js";
+import LinkedList from "./LinkedList.js";
 
 const hashInstance = new HashMap(.75, 16);
 

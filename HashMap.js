@@ -1,8 +1,10 @@
+import LinkedList from "./LinkedList.js";
+
 class HashMap {
     constructor(loadFactor, capacity) {
         this.loadFactor = loadFactor;
         this.capacity = capacity;
-        this.buckets = new Array(this.capacity);
+        this.buckets = Array.from({length: this.capacity}, () => new LinkedList());
     }
 
     hash(key) {
@@ -18,18 +20,37 @@ class HashMap {
     } 
 
     set(key, value) {
-        const index = this.hash(key)
-        this.buckets[index] = value;
+        const index = this.hash(key);
+
+        if(index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
+        const bucket = this.buckets[index];
+        bucket.upsert(key, value);
     }
 
     get(key) {
         const index = this.hash(key)
-        const result = this.buckets[index]
-        return result ? result : null
+
+        if(index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
+        const bucket = this.buckets[index]
+        const node = bucket.get(key);
+        return node ? node.value : null;
     }
 
     has(key) {
-        
+        const index = this.hash(key);
+
+        if(index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
+        const bucket = this.buckets[index];
+        return bucket.contains()
     }
 
     entries() {
