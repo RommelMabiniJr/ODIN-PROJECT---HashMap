@@ -38,7 +38,7 @@ A JavaScript implementation of a Hashmap, built as part of [The Odin Project's](
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/Hashmap.git
+    git clone https://github.com/RommelMabiniJr/ODIN-PROJECT---HashMap.git
     ```
 2. Open the project folder and review the `HashMap.js`, `LinkedList.js`, and `Node` class (inside `LinkedList.js`).
 
