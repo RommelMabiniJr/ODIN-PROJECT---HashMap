@@ -86,21 +86,79 @@ class LinkedList {
         this.update(key, value)
     }
   }
+
+  remove(key) {
+    if(!this.head) return false;
+
+    // When key is at the head
+    if(this.head.key === key) {
+      this.head = this.head.next;
+      this.length--;
+
+      // If we removed the last node, update tail
+      if(!this.head) this.tail = null;
+      return true;
+    }
+
+
+    let previousNode = this.head;
+    let currentNode = this.head.next;
+
+    while(currentNode) {
+      if(currentNode.key === key) {
+        previousNode.next = currentNode.next;
+        // If we removed the last node, update tail
+        if(currentNode === this.tail) {
+          this.tail = previousNode; // Update tail to the previous node
+        }
+        this.length--;
+        return true;
+      }
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+    }
+    return false;
+  }
+
+  getAllKeys() {
+    let current = this.head;
+    let allKeys = [];
+
+    while(current != null) {
+      allKeys.push(current.key);
+      current = current.next
+    }
+
+    return allKeys;
+  }
+
+  getAllValues() {
+    let current = this.head;
+    let allValues = [];
+
+    while(current != null) {
+      allValues.push(current.value);
+      current = current.next
+    }
+
+    return allValues;
+  }
+
+  getAllKeyAndValuePair() {
+    let current = this.head;
+    let allPairs = [];
+
+    while(current != null) {
+      allPairs.push([current.key, current.value]);
+      current = current.next
+    }
+
+    return allPairs;
+  }
+
+  numberOfNodes() {
+    return this.length;
+  }
 }
 
 export default LinkedList;
-
-
-// const list = new LinkedList();
-// list.append("Carlo");
-// list.append("Mark");
-// list.prepend("Olrak");
-// list.append("Darius");
-// list.print(); // Output: 5 -> 10 -> 20
-// // console.log(list.removeHead()); // 5
-// list.print(); // Output: 10 -> 20
-// console.log(list.length);
-// console.log(list.contains("Nonexistent"))
-// console.log(list.contains("Mark"))
-// console.log(list.head);
-// console.log(list.tail);
